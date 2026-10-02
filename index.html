@@ -1,0 +1,1486 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#163d35">
+	<title>Morrow Home Services</title>
+	<meta name="description" content="Home repair, cleaning, and maintenance requests for Junagadh, Gujarat. Find the right Morrow service for your home.">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			color-scheme: light;
+			--forest: #163d35;
+			--forest-deep: #0d2b26;
+			--leaf: #d8ee9b;
+			--leaf-strong: #b7d778;
+			--coral: #e77a60;
+			--paper: #f6f7f2;
+			--white: #fff;
+			--ink: #172b27;
+			--muted: #687872;
+			--line: #dce4dc;
+			--serif: Georgia, "Times New Roman", serif;
+			--sans: "DM Sans", "Segoe UI", sans-serif;
+			--display: "Manrope", "Segoe UI", sans-serif;
+			font-family: var(--sans);
+			color: var(--ink);
+			background: var(--paper);
+			scroll-behavior: smooth;
+		}
+
+		* { box-sizing: border-box; }
+		body { margin: 0; min-width: 320px; }
+		button, input, textarea { font: inherit; }
+		button, a { -webkit-tap-highlight-color: transparent; }
+		a { color: inherit; text-decoration: none; }
+		button { color: inherit; }
+		img { display: block; max-width: 100%; }
+		[hidden] { display: none !important; }
+		.shell { width: min(1200px, calc(100% - 48px)); margin-inline: auto; }
+
+		.site-header {
+			position: sticky;
+			z-index: 10;
+			top: 0;
+			border-bottom: 1px solid rgb(22 61 53 / 9%);
+			background: rgba(246, 247, 242, 0.9);
+			backdrop-filter: blur(14px);
+			box-shadow: 0 8px 22px rgba(13, 43, 38, 0.04);
+		}
+		.header-inner { min-height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 28px; }
+		.brand { display: inline-flex; align-items: center; gap: 11px; font: 800 20px var(--display); white-space: nowrap; }
+		.brand-mark {
+			width: 31px; height: 31px; position: relative; display: grid; place-items: center;
+			border-radius: 9px; background: linear-gradient(135deg, var(--leaf), #edf8c4);
+			box-shadow: 0 10px 18px rgba(184, 215, 120, 0.32);
+			transform: rotate(-4deg);
+		}
+		.brand-mark::before, .brand-mark::after { position: absolute; content: ""; }
+		.brand-mark::before {
+			left: 7px; top: 7px; width: 4px; height: 16px; border-radius: 3px; background: var(--forest);
+			box-shadow: 10px 0 0 var(--forest), 5px -4px 0 var(--forest), 5px 4px 0 var(--forest);
+		}
+		.brand-mark::after {
+			right: 7px; bottom: 7px; width: 12px; height: 12px; border-left: 4px solid var(--forest); border-bottom: 4px solid var(--forest);
+			border-radius: 0 0 0 3px; transform: rotate(45deg) skewX(-12deg);
+		}
+		.brand small { display: block; margin-top: 1px; color: var(--muted); font: 600 9px var(--sans); letter-spacing: 1px; text-transform: uppercase; }
+		.main-nav { display: flex; align-items: center; gap: 34px; color: #465852; font-size: 13px; font-weight: 600; }
+		.main-nav a { transition: color .2s ease; }
+		.main-nav a:hover { color: var(--coral); }
+		.header-actions { display: flex; align-items: center; gap: 12px; }
+		.button { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 0 17px; border: 1px solid transparent; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: 700; transition: transform .2s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease; }
+		.button:hover { transform: translateY(-2px); }
+		.button-dark { color: var(--white); background: var(--forest); box-shadow: 0 10px 18px rgba(22, 61, 53, 0.14); }
+		.button-dark:hover { background: var(--forest-deep); box-shadow: 0 14px 22px rgba(22, 61, 53, 0.18); }
+		.button-outline { border-color: #cbd7ce; background: transparent; }
+		.button-outline:hover { border-color: var(--forest); }
+		.button-light { color: var(--forest); background: var(--leaf); }
+		.button-light:hover { background: #e4f4ba; }
+		.button-text { min-height: 40px; padding-inline: 10px; background: transparent; border-color: transparent; }
+		.button-text:hover { color: var(--forest); background: rgba(22, 61, 53, 0.04); }
+		.mobile-toggle { display: none; width: 42px; height: 42px; border: 1px solid var(--line); border-radius: 4px; background: transparent; cursor: pointer; font-size: 19px; }
+		.welcome-screen {
+			width: 100vw; height: 100svh; max-width: none; max-height: none; position: fixed; inset: 0; display: grid; place-items: center; margin: 0; padding: 0; overflow: hidden; border: 0; color: var(--paper); background: radial-gradient(ellipse at 50% 48%, #1d4840 0%, #102d28 48%, #0a211e 100%); isolation: isolate; opacity: 0; visibility: hidden; pointer-events: none; transform: scale(1.04); transition: opacity .42s ease, transform .42s ease, visibility .42s ease;
+		}
+		.welcome-screen::backdrop { background: #0a211e; }
+		.welcome-screen[open] {
+			display: grid; opacity: 1; visibility: visible; pointer-events: auto; transform: scale(1);
+		}
+		.welcome-screen.is-closing { opacity: 0; transform: scale(1.02); }
+		.welcome-screen::before { position: absolute; z-index: -1; inset: -40%; content: ""; opacity: .2; background: repeating-linear-gradient(128deg, transparent 0 74px, rgb(216 238 155 / 15%) 75px, transparent 76px 148px); transform: rotate(-8deg); animation: welcome-drift 28s linear infinite; }
+		.welcome-screen::after { position: absolute; z-index: -1; top: -32vmin; left: -24vmin; width: 105vmin; aspect-ratio: 1; border: 1px solid rgb(216 238 155 / 12%); border-radius: 50%; content: ""; box-shadow: 0 0 0 6vmin rgb(216 238 155 / 2%), 0 0 0 14vmin rgb(216 238 155 / 2%), 0 0 0 24vmin rgb(216 238 155 / 2%); animation: welcome-orbit 32s ease-in-out infinite alternate; }
+		.welcome-grain { position: absolute; z-index: -1; inset: 0; opacity: .12; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.92' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E"); mix-blend-mode: soft-light; }
+		.welcome-content { width: min(100% - 36px, 720px); display: grid; justify-items: center; padding: 36px 0; text-align: center; opacity: 0; transform: translateY(18px); transition: opacity .5s ease .08s, transform .5s ease .08s; }
+		.welcome-screen[open] .welcome-content { opacity: 1; transform: translateY(0); }
+		.welcome-brand { display: inline-flex; align-items: center; gap: 21px; animation: welcome-brand-in 1.15s cubic-bezier(.2,.8,.2,1) .18s both; }
+		.welcome-brand-mark {
+			width: clamp(61px, 9vw, 84px); height: clamp(61px, 9vw, 84px);
+			border: 1px solid rgb(255 255 255 / 35%); box-shadow: 0 0 56px rgb(216 238 155 / 22%), 0 18px 45px rgb(0 0 0 / 23%);
+			transform: rotate(-5deg); animation: welcome-mark-settle .9s cubic-bezier(.2,.8,.2,1) .42s both;
+		}
+		.welcome-name { color: var(--paper); font: 800 clamp(48px, 9vw, 78px)/1 var(--display); letter-spacing: .015em; animation: welcome-letter-in .58s cubic-bezier(.2,.8,.2,1) both; }
+		.welcome-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 13px; margin-top: 53px; animation: welcome-actions-in .8s ease 1.08s both; }
+		.welcome-action { min-width: 164px; min-height: 52px; display: inline-flex; align-items: center; justify-content: center; gap: 13px; padding: 0 23px; border: 1px solid rgb(247 248 242 / 48%); border-radius: 4px; color: var(--paper); background: rgb(255 255 255 / 3%); cursor: pointer; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; transition: transform .22s ease, color .22s ease, background .22s ease, border-color .22s ease, box-shadow .22s ease; }
+		.welcome-action:hover { transform: translateY(-3px); border-color: var(--leaf); color: var(--leaf); }
+		.welcome-action-primary { border-color: var(--leaf); color: #102d28; background: var(--leaf); box-shadow: 0 8px 28px rgb(216 238 155 / 13%); }
+		.welcome-action-primary:hover { color: #102d28; background: #e4f4ba; box-shadow: 0 12px 34px rgb(216 238 155 / 23%); }
+		.welcome-arrow { color: var(--coral); font-size: 16px; line-height: 1; transition: transform .22s ease; }
+		.welcome-action:hover .welcome-arrow { transform: translateX(4px); }
+		.welcome-rule { width: 1px; height: 0; position: absolute; bottom: 0; left: 50%; background: linear-gradient(transparent, var(--coral), transparent); opacity: .8; animation: welcome-rule-in 1.2s ease 1.25s forwards; }
+		@keyframes welcome-brand-in { from { opacity: 0; transform: translateY(22px) scale(.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
+		@keyframes welcome-letter-in { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+		@keyframes welcome-mark-settle { from { transform: rotate(-14deg) scale(.82); } to { transform: rotate(-5deg) scale(1); } }
+		@keyframes welcome-actions-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+		@keyframes welcome-drift { to { background-position: 296px 168px; } }
+		@keyframes welcome-orbit { to { transform: translate(9vmin, 5vmin) scale(1.08); } }
+		@keyframes welcome-rule-in { to { height: 22vh; } }
+		@media (max-width: 980px) {
+			.main-nav { display: none; }
+			.hero-grid { grid-template-columns: 1fr; }
+			.hero { padding-top: 36px; }
+			.service-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+			.approach-inner, .help-grid, .agent-layout { grid-template-columns: 1fr; }
+			.trust-inner { grid-template-columns: repeat(2, 1fr); }
+		}
+		@media (max-width: 620px) {
+			.shell { width: min(100% - 28px, 1200px); }
+			.header-actions { gap: 8px; }
+			.button { min-height: 40px; }
+			.hero-actions .button { width: 100%; }
+			.service-grid, .care-note-grid, .trust-inner, .steps { grid-template-columns: 1fr; }
+			.section-heading, .care-notes-heading { flex-direction: column; align-items: flex-start; }
+			.welcome-brand { gap: 14px; }
+			.welcome-brand-mark { border-radius: 18px 18px 18px 4px; }
+			.welcome-actions { width: min(100%, 340px); flex-direction: column; margin-top: 42px; }
+			.welcome-action { width: 100%; }
+		}
+		@media (prefers-reduced-motion: reduce) {
+			*, *::before, *::after {
+				animation-duration: .01ms !important;
+				animation-iteration-count: 1 !important;
+				transition-duration: .01ms !important;
+				scroll-behavior: auto !important;
+			}
+		}
+
+		.hero { position: relative; padding-block: 52px 70px; background: radial-gradient(circle at top left, rgba(216, 238, 155, 0.18), transparent 28%), linear-gradient(180deg, rgba(246, 247, 242, 0.9), rgba(246, 247, 242, 1)); }
+		.hero-grid { display: grid; grid-template-columns: 1fr 1.04fr; gap: 52px; align-items: center; }
+		.eyebrow { display: inline-flex; align-items: center; gap: 9px; color: #52675c; font-size: 11px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; }
+		.eyebrow::before { width: 21px; height: 2px; content: ""; background: var(--coral); }
+		h1, h2, h3, p { margin-top: 0; }
+		h1 { max-width: 560px; margin: 21px 0 19px; font: 600 60px/1.07 var(--display); letter-spacing: 0; }
+		h1 em { color: var(--forest); font-family: var(--serif); font-weight: 400; }
+		.hero-copy { max-width: 440px; margin-bottom: 25px; color: var(--muted); font-size: 16px; line-height: 1.7; }
+		.hero-actions { display: flex; flex-wrap: wrap; gap: 11px; }
+		.hero-actions .button { min-height: 48px; padding-inline: 20px; }
+		.hero-proof { display: flex; align-items: center; gap: 12px; margin-top: 27px; color: #52675c; font-size: 12px; }
+		.avatar-stack { display: flex; padding-left: 5px; }
+		.avatar-stack img { width: 31px; height: 31px; margin-left: -5px; border: 2px solid var(--paper); border-radius: 50%; object-fit: cover; }
+		.hero-proof strong { color: var(--ink); }
+		.hero-ad { min-width: 0; overflow: hidden; border: 1px solid rgba(216, 224, 216, 0.8); border-radius: 18px; background: #10241f; box-shadow: 0 26px 60px rgba(16, 36, 31, 0.18); animation: rise-in .8s .12s ease both; }
+		.hero-ad-stage { position: relative; overflow: hidden; aspect-ratio: 16 / 10.6; background: #10241f; }
+		.hero-ad-video { width: 100%; height: 100%; position: absolute; inset: 0; object-fit: cover; }
+		.hero-ad-stage::after { position: absolute; inset: 0; content: ""; pointer-events: none; background: linear-gradient(180deg, rgb(7 27 23 / 28%), transparent 36%, rgb(7 27 23 / 80%) 100%); }
+		.hero-ad-brand { position: absolute; z-index: 1; top: 16px; left: 16px; padding: 8px 10px; border: 1px solid rgb(255 255 255 / 55%); border-radius: 3px; color: var(--white); background: rgb(13 43 38 / 75%); font-size: 9px; font-weight: 700; letter-spacing: 1.2px; pointer-events: none; }
+		.hero-ad-copy { position: absolute; z-index: 1; right: 20px; bottom: 72px; left: 20px; color: var(--white); pointer-events: none; animation: ad-copy-in .8s .35s both; }
+		.hero-ad-copy span { display: block; margin-bottom: 7px; color: var(--leaf); font-size: 9px; font-weight: 700; letter-spacing: 1.5px; }
+		.hero-ad-copy strong { display: block; max-width: 440px; font: 600 27px/1.12 var(--display); }
+		.hero-ad-play { position: absolute; z-index: 2; top: 50%; left: 50%; display: inline-flex; align-items: center; gap: 9px; padding: 11px 15px; border: 1px solid rgb(255 255 255 / 60%); border-radius: 3px; color: var(--forest-deep); background: var(--leaf); cursor: pointer; font-size: 11px; font-weight: 700; transform: translate(-50%, -50%); }
+		.hero-ad-play:hover { background: #e4f4ba; }
+		.hero-ad-stage.is-playing .hero-ad-copy { opacity: 0; transition: opacity .35s ease; }
+		.hero-ad-tools { min-height: 51px; display: flex; align-items: center; gap: 12px; padding: 9px 12px; color: #d1dfd5; background: #10241f; }
+		.hero-ad-sound { min-height: 30px; padding: 0 9px; border: 1px solid rgb(255 255 255 / 28%); border-radius: 3px; color: var(--leaf); background: transparent; cursor: pointer; font-size: 10px; font-weight: 700; white-space: nowrap; }
+		.hero-ad-sound:hover { color: var(--forest-deep); background: var(--leaf); }
+		.hero-ad-volume { width: 95px; display: flex; align-items: center; gap: 6px; color: #b9c9c0; font-size: 9px; white-space: nowrap; }
+		.hero-ad-volume input { width: 56px; accent-color: var(--leaf); }
+		.hero-ad-credit { margin-left: auto; color: #b9c9c0; font-size: 9px; text-align: right; }
+		.hero-ad-credit a { color: var(--leaf); text-decoration: underline; text-underline-offset: 2px; }
+
+		.trust-band { color: var(--white); background: var(--forest); }
+		.trust-inner { min-height: 94px; display: grid; grid-template-columns: repeat(4, 1fr); align-items: center; gap: 20px; }
+		.trust-item { display: flex; align-items: center; justify-content: center; gap: 12px; color: #d4e1da; font-size: 12px; }
+		.trust-item b { color: var(--leaf); font: 700 18px var(--display); }
+		.trust-item span { max-width: 138px; line-height: 1.35; }
+		.section { padding-block: 92px; }
+		.section-heading { display: flex; align-items: end; justify-content: space-between; gap: 30px; margin-bottom: 31px; }
+		.section-heading h2 { margin: 12px 0 0; font: 600 38px/1.16 var(--display); }
+		.section-heading p { max-width: 390px; margin: 0 0 3px; color: var(--muted); font-size: 14px; line-height: 1.65; }
+		.filter-bar { display: inline-flex; flex-wrap: wrap; gap: 4px; margin-bottom: 22px; padding: 4px; border: 1px solid var(--line); border-radius: 5px; background: #edf0e9; }
+		.filter-button { min-height: 34px; padding: 0 13px; border: 0; border-radius: 3px; color: #55645d; background: transparent; cursor: pointer; font-size: 12px; font-weight: 600; }
+		.filter-button[aria-pressed="true"] { color: var(--white); background: var(--forest); }
+		.pricing-note { margin: -10px 0 20px; color: var(--muted); font-size: 11px; line-height: 1.5; }
+		.service-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 15px; }
+		.service-card { min-width: 0; overflow: hidden; border: 1px solid #e0e6df; border-radius: 12px; background: var(--white); transition: transform .22s ease, box-shadow .22s ease; box-shadow: 0 12px 24px rgba(19, 49, 41, 0.04); }
+		.service-card:hover { transform: translateY(-4px); box-shadow: 0 18px 34px rgba(19, 49, 41, 0.1); }
+		.service-card[hidden] { display: none; }
+		.service-image { height: 150px; position: relative; overflow: hidden; background: #d8ded5; }
+		.service-image img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+		.service-card:hover .service-image img { transform: scale(1.04); }
+		.service-type { position: absolute; top: 11px; left: 11px; padding: 6px 9px; border: 1px solid rgb(255 255 255 / 60%); border-radius: 3px; color: var(--forest); background: rgb(255 255 255 / 88%); font-size: 10px; font-weight: 700; }
+		.service-content { padding: 16px 15px 15px; }
+		.service-content h3 { margin: 0 0 7px; font: 700 16px var(--display); }
+		.service-content p { min-height: 40px; margin-bottom: 15px; color: var(--muted); font-size: 12px; line-height: 1.55; }
+		.service-bottom { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-top: 12px; border-top: 1px solid #edf0eb; }
+		.service-price { color: var(--muted); font-size: 10px; }
+		.service-price strong { display: block; margin-top: 3px; color: var(--ink); font-size: 13px; }
+		.book-button { min-height: 34px; padding: 0 10px; border: 0; border-radius: 3px; color: var(--forest); background: var(--leaf); cursor: pointer; font-size: 11px; font-weight: 700; }
+		.book-button:hover { background: var(--leaf-strong); }
+		.service-dialog { width: min(880px, calc(100% - 28px)); max-width: none; max-height: min(740px, calc(100% - 28px)); padding: 0; overflow: auto; border: 0; border-radius: 6px; color: var(--ink); background: var(--paper); box-shadow: 0 24px 90px rgb(4 20 16 / 38%); }
+		.service-dialog::backdrop { background: rgb(7 27 23 / 72%); backdrop-filter: blur(4px); }
+		.service-detail-layout { min-height: 570px; display: grid; grid-template-columns: .82fr 1.18fr; }
+		.service-detail-visual { min-height: 100%; position: relative; overflow: hidden; background: #d8ded5; }
+		.service-detail-visual img { width: 100%; height: 100%; position: absolute; inset: 0; object-fit: cover; }
+		.service-detail-visual::after { position: absolute; inset: 0; content: ""; background: linear-gradient(180deg, rgb(7 27 23 / 42%), transparent 32%, rgb(7 27 23 / 35%)); pointer-events: none; }
+		.service-detail-category { position: absolute; z-index: 1; top: 18px; left: 18px; padding: 7px 10px; border-radius: 3px; color: var(--forest); background: var(--leaf); font-size: 9px; font-weight: 700; letter-spacing: 1px; }
+		.service-dialog-close { position: absolute; z-index: 2; top: 12px; right: 12px; width: 36px; height: 36px; border: 1px solid rgb(255 255 255 / 70%); border-radius: 4px; color: var(--white); background: rgb(13 43 38 / 72%); cursor: pointer; font-size: 21px; }
+		.service-detail-content { padding: 31px 34px 27px; }
+		.service-detail-content h2 { margin: 11px 0 9px; font: 700 29px/1.18 var(--display); }
+		.service-detail-summary { margin-bottom: 19px; color: var(--muted); font-size: 13px; line-height: 1.65; }
+		.service-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; margin-bottom: 17px; }
+		.service-fact { min-width: 0; padding: 11px 10px; border: 1px solid var(--line); border-radius: 3px; background: var(--white); }
+		.service-fact span { display: block; margin-bottom: 5px; color: var(--muted); font-size: 9px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; }
+		.service-fact strong { display: block; font: 700 12px/1.35 var(--display); }
+		.service-estimate { margin: 0 0 15px; color: var(--muted); font-size: 11px; }
+		.service-estimate strong { color: var(--ink); font-size: 15px; }
+		.service-offer { margin-bottom: 18px; padding: 12px 14px; border-left: 3px solid var(--coral); color: #405449; background: #edf3df; font-size: 11px; line-height: 1.55; }
+		.service-offer strong { color: var(--forest); }
+		.service-detail-content h3 { margin: 0 0 9px; font: 700 13px var(--display); }
+		.service-inclusions { display: grid; gap: 7px; margin: 0 0 11px; padding: 0; list-style: none; }
+		.service-inclusions li { position: relative; padding-left: 17px; color: #52645b; font-size: 11px; line-height: 1.5; }
+		.service-inclusions li::before { position: absolute; left: 0; color: #ba5a46; content: "✓"; font-weight: 700; }
+		.service-detail-note { margin: 0 0 20px; color: #77867e; font-size: 10px; line-height: 1.55; }
+		.service-detail-actions { display: flex; flex-wrap: wrap; gap: 9px; }
+
+		.approach { color: var(--white); background: var(--forest-deep); }
+		.approach-inner { display: grid; grid-template-columns: .9fr 1.1fr; gap: 75px; align-items: center; }
+		.approach h2 { margin: 13px 0 16px; font: 600 39px/1.17 var(--display); }
+		.approach-copy { max-width: 410px; margin: 0; color: #c5d4cb; font-size: 14px; line-height: 1.7; }
+		.approach .eyebrow { color: #c7d6ce; }
+		.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+		.step { min-height: 180px; padding: 19px 16px; border: 1px solid rgb(255 255 255 / 18%); border-radius: 5px; background: rgb(255 255 255 / 4%); }
+		.step-number { display: inline-grid; width: 29px; height: 29px; place-items: center; border-radius: 50%; color: var(--forest); background: var(--leaf); font: 700 12px var(--display); }
+		.step h3 { margin: 26px 0 8px; font: 700 14px var(--display); }
+		.step p { margin: 0; color: #c5d4cb; font-size: 11px; line-height: 1.55; }
+		.care-notes { position: relative; overflow: hidden; background: #f0ebe3; }
+		.care-notes::before { position: absolute; inset: 0; content: ""; background-image: repeating-linear-gradient(135deg, transparent 0 32px, rgb(22 61 53 / 3%) 33px 34px); pointer-events: none; }
+		.care-notes-inner { position: relative; }
+		.care-notes-heading { display: flex; align-items: end; justify-content: space-between; gap: 30px; }
+		.care-notes-heading h2 { margin: 12px 0 0; font: 600 38px/1.16 var(--display); }
+		.care-notes-heading p { max-width: 370px; margin: 0 0 3px; color: var(--muted); font-size: 14px; line-height: 1.7; }
+		.care-note-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 31px; }
+		.care-note { min-width: 0; overflow: hidden; border: 1px solid #dfddd4; border-radius: 5px; background: #fffdfa; transition: transform .22s ease, box-shadow .22s ease; }
+		.care-note:hover { transform: translateY(-4px); box-shadow: 0 14px 28px rgb(19 49 41 / 8%); }
+		.care-note-visual { height: 178px; position: relative; overflow: hidden; background: #d7d9cf; }
+		.care-note-visual img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+		.care-note:hover .care-note-visual img { transform: scale(1.04); }
+		.care-note-number { position: absolute; top: 12px; left: 12px; display: grid; width: 35px; height: 35px; place-items: center; border: 1px solid rgb(255 255 255 / 70%); border-radius: 50%; color: var(--forest); background: var(--leaf); font: 700 11px var(--display); }
+		.care-note-content { min-height: 205px; display: flex; flex-direction: column; align-items: flex-start; padding: 18px; }
+		.care-note-kicker { margin-bottom: 9px; color: #ba5a46; font-size: 9px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; }
+		.care-note-content h3 { margin: 0 0 9px; font: 700 18px/1.25 var(--display); }
+		.care-note-content p { margin: 0 0 18px; color: var(--muted); font-size: 12px; line-height: 1.7; }
+		.care-note-link { display: inline-flex; align-items: center; gap: 7px; margin-top: auto; color: var(--forest); font-size: 11px; font-weight: 700; }
+		.care-note-link span { color: var(--coral); transition: transform .2s ease; }
+		.care-note-link:hover span { transform: translateX(3px); }
+		.agent-section { position: relative; overflow: hidden; color: var(--white); background: var(--forest-deep); }
+		.agent-section::before { position: absolute; top: -100px; right: -90px; width: 430px; height: 430px; border: 1px solid rgb(216 238 155 / 13%); border-radius: 50%; content: ""; pointer-events: none; }
+		.agent-layout { position: relative; display: grid; grid-template-columns: .82fr 1.18fr; align-items: start; gap: 70px; }
+		.agent-copy .eyebrow { color: #c7d6ce; }
+		.agent-copy h2 { margin: 13px 0 17px; font: 600 38px/1.16 var(--display); }
+		.agent-copy p { max-width: 390px; color: #c5d4cb; font-size: 14px; line-height: 1.7; }
+		.agent-points { display: grid; gap: 12px; margin-top: 24px; }
+		.agent-point { display: flex; align-items: flex-start; gap: 11px; color: #d5e0d9; font-size: 12px; line-height: 1.5; }
+		.agent-point b { color: var(--leaf); font: 700 12px var(--display); }
+		.agent-form { padding: 24px; border: 1px solid #e0e8e0; border-radius: 5px; color: var(--ink); background: #fffdfa; }
+		.agent-form h3 { margin: 0 0 7px; font: 700 20px var(--display); }
+		.agent-form-intro { margin-bottom: 18px; color: var(--muted); font-size: 11px; line-height: 1.6; }
+		.agent-field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 13px; }
+		.agent-service-choices { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 0 0 15px; padding: 13px; border: 1px solid #d6dfd7; border-radius: 3px; background: #fbfcf9; }
+		.agent-service-choices legend { padding: 0 5px; color: #354840; font-size: 11px; font-weight: 700; }
+		.agent-service-choices label { display: flex; align-items: flex-start; gap: 7px; color: #52645b; font-size: 10px; line-height: 1.4; }
+		.agent-service-choices input { margin: 1px 0 0; accent-color: var(--forest); }
+		.agent-consent { margin: 4px 0 15px; }
+		.agent-submit { width: 100%; }
+		.agent-form-note { margin: 10px 0 0; color: #77867e; font-size: 9px; line-height: 1.5; }
+
+		.help-section { background: #eef2eb; }
+		.help-grid { display: grid; grid-template-columns: 1fr .82fr; gap: 76px; align-items: start; }
+		.faq-list { margin-top: 25px; border-top: 1px solid #cfd9d0; }
+		.faq-list details { border-bottom: 1px solid #cfd9d0; }
+		.faq-list summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 17px 1px; cursor: pointer; list-style: none; font-size: 14px; font-weight: 700; }
+		.faq-list summary::-webkit-details-marker { display: none; }
+		.faq-list summary::after { content: "+"; color: var(--forest); font: 400 23px var(--sans); }
+		.faq-list details[open] summary::after { content: "−"; }
+		.faq-list details p { max-width: 520px; margin: -4px 0 17px; color: var(--muted); font-size: 13px; line-height: 1.7; }
+		.support-panel { padding: 24px; border-radius: 5px; background: var(--white); }
+		.support-panel h3 { margin: 0 0 8px; font: 700 21px var(--display); }
+		.support-panel > p { margin-bottom: 19px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+		.contact-details { display: grid; gap: 12px; margin: 18px 0 20px; padding: 14px; border: 1px solid #e1e8df; border-radius: 4px; background: #f5f8f2; }
+		.contact-detail { display: grid; gap: 4px; }
+		.contact-detail span { color: var(--muted); font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+		.contact-detail a, .contact-detail p { width: fit-content; margin: 0; color: var(--forest); font-size: 12px; font-weight: 700; line-height: 1.5; overflow-wrap: anywhere; }
+		.contact-placeholder { margin: -8px 0 17px !important; color: #7b8982 !important; font-size: 10px !important; }
+		.field { display: grid; gap: 7px; margin-bottom: 14px; }
+		.field label { color: #354840; font-size: 11px; font-weight: 700; }
+		.field input, .field select, .field textarea { width: 100%; min-height: 43px; padding: 11px 12px; border: 1px solid #d6dfd7; border-radius: 3px; outline: none; color: var(--ink); background: #fbfcf9; font-size: 13px; }
+		.field textarea { min-height: 91px; resize: vertical; }
+		.field input:focus, .field select:focus, .field textarea:focus { border-color: var(--forest); box-shadow: 0 0 0 3px rgb(22 61 53 / 9%); }
+		.support-submit { width: 100%; }
+		.form-note { margin: 11px 0 0 !important; color: #7b8982 !important; font-size: 10px !important; }
+
+		.site-footer { padding-block: 32px; color: #d5e0d9; background: #0b2722; }
+		.footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 22px; }
+		.footer-brand { color: var(--white); }
+		.footer-inner p { margin: 0; font-size: 11px; }
+		.footer-links { display: flex; gap: 18px; font-size: 11px; }
+		.footer-links a:hover { color: var(--leaf); }
+
+		.auth-dialog { width: min(790px, calc(100% - 28px)); max-width: none; max-height: min(720px, calc(100% - 28px)); padding: 0; overflow: auto; border: 0; border-radius: 7px; color: var(--ink); background: var(--paper); box-shadow: 0 24px 90px rgb(4 20 16 / 38%); }
+		.auth-dialog::backdrop { background: rgb(7 27 23 / 70%); backdrop-filter: blur(4px); }
+		.dialog-grid { display: grid; min-height: 540px; grid-template-columns: .85fr 1.15fr; }
+		.dialog-aside { position: relative; display: flex; flex-direction: column; justify-content: space-between; min-height: 100%; padding: 25px; overflow: hidden; color: var(--white); background: var(--forest); }
+		.dialog-aside::before { position: absolute; inset: 0; content: ""; background: linear-gradient(0deg, rgb(7 31 26 / 88%), rgb(7 31 26 / 5%) 76%), url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80") center/cover; opacity: .75; }
+		.dialog-aside > * { position: relative; z-index: 1; }
+		.dialog-aside .brand { align-self: start; }
+		.dialog-aside .brand small { color: #d5e0d9; }
+		.dialog-aside blockquote { margin: 0; font: 400 25px/1.32 var(--serif); }
+		.dialog-aside blockquote span { display: block; margin-top: 12px; color: #dce9df; font: 600 11px var(--sans); }
+		.dialog-content { padding: 30px 34px; }
+		.dialog-top { display: flex; justify-content: flex-end; }
+		.close-button { width: 34px; height: 34px; border: 1px solid var(--line); border-radius: 4px; background: transparent; cursor: pointer; font-size: 19px; }
+		.close-button:hover { background: #e9eee8; }
+		.dialog-content h2 { margin: 19px 0 8px; font: 700 27px var(--display); }
+		.dialog-intro { margin-bottom: 19px; color: var(--muted); font-size: 12px; line-height: 1.55; }
+		.auth-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-bottom: 19px; padding: 4px; border-radius: 4px; background: #e9eee8; }
+		.auth-tab { min-height: 36px; border: 0; border-radius: 3px; color: #5e6e66; background: transparent; cursor: pointer; font-size: 12px; font-weight: 700; }
+		.auth-tab[aria-selected="true"] { color: var(--white); background: var(--forest); }
+		.password-wrap { display: flex; align-items: center; }
+		.password-wrap input { border-radius: 3px 0 0 3px; }
+		.password-toggle { min-height: 43px; padding: 0 10px; border: 1px solid #d6dfd7; border-left: 0; border-radius: 0 3px 3px 0; color: #53645b; background: #fbfcf9; cursor: pointer; font-size: 10px; font-weight: 700; }
+		.auth-options { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 4px 0 17px; color: var(--muted); font-size: 11px; }
+		.check-label { display: flex; align-items: flex-start; gap: 8px; color: #53645b; font-size: 11px; line-height: 1.4; }
+		.check-label input { accent-color: var(--forest); }
+		.text-button { padding: 0; border: 0; color: var(--forest); background: transparent; cursor: pointer; font-size: 11px; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+		.auth-submit { width: 100%; margin-top: 8px; }
+		.auth-disclaimer { margin: 14px 0 0; color: #829087; font-size: 10px; line-height: 1.5; }
+		.booking-view { margin-top: 14px; }
+		.booking-view h3, .account-view h3 { margin: 0 0 7px; font: 700 19px var(--display); }
+		.booking-intro, .account-intro { margin-bottom: 16px; color: var(--muted); font-size: 11px; line-height: 1.55; }
+		.booking-service { margin-bottom: 14px; padding: 11px 12px; border-left: 3px solid var(--coral); color: var(--muted); background: #edf2ea; font-size: 11px; }
+		.booking-service strong { display: block; margin-top: 3px; color: var(--ink); font-size: 13px; }
+		.request-list { display: grid; gap: 8px; max-height: 230px; margin: 14px 0; overflow: auto; }
+		.request-item { padding: 11px 12px; border: 1px solid var(--line); border-radius: 4px; background: var(--white); }
+		.request-item.is-highlighted { border-color: var(--coral); box-shadow: inset 3px 0 var(--coral); }
+		.request-item strong, .request-item span { display: block; }
+		.request-item strong { font-size: 12px; }
+		.request-item span { margin-top: 4px; color: var(--muted); font-size: 10px; }
+		.booking-pay-button { align-self: flex-start; min-height: 34px; margin-top: 7px; padding-inline: 11px; font-size: 10px; }
+		.booking-pay-button:disabled { cursor: not-allowed; opacity: .65; }
+		.request-status { color: #835b14 !important; font-weight: 700; }
+		.account-actions { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 15px; }
+		.payment-method-note { color: var(--muted); font-size: 10px; line-height: 1.5; }
+		.success-state { padding-top: 12px; }
+		.success-mark { display: grid; width: 45px; height: 45px; place-items: center; border-radius: 50%; color: var(--forest); background: var(--leaf); font-size: 23px; }
+		.success-state h3 { margin: 17px 0 8px; font: 700 20px var(--display); }
+		.success-state p { color: var(--muted); font-size: 12px; line-height: 1.65; }
+		.toast { position: fixed; z-index: 30; right: 22px; bottom: 22px; max-width: min(380px, calc(100% - 44px)); padding: 14px 17px; border: 1px solid rgb(255 255 255 / 15%); border-radius: 4px; color: var(--white); background: var(--forest-deep); box-shadow: 0 12px 32px rgb(9 32 26 / 22%); font-size: 12px; line-height: 1.45; animation: toast-in .25s ease both; }
+
+		.reveal { opacity: 0; transform: translateY(15px); transition: opacity .6s ease, transform .6s ease; }
+		.reveal.is-visible { opacity: 1; transform: translateY(0); }
+		.hero-copy-block { animation: rise-in .65s ease both; }
+		@keyframes rise-in { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+		@keyframes ad-copy-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+		@keyframes toast-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+		@media (max-width: 960px) {
+			.main-nav { gap: 12px; font-size: 11px; }
+			.hero-grid { gap: 32px; }
+			h1 { font-size: 51px; }
+			.hero-ad-copy strong { font-size: 23px; }
+			.service-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+			.care-note-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+			.approach-inner { gap: 40px; }
+			.help-grid { gap: 42px; }
+		}
+		@media (max-width: 820px) {
+			.header-inner { min-height: 66px; gap: 10px; }
+			.header-actions { gap: 5px; }
+			.header-actions .button { min-height: 39px; padding-inline: 11px; font-size: 11px; }
+			.mobile-toggle { display: inline-grid; place-items: center; }
+			.main-nav { position: absolute; top: 65px; right: 0; left: 0; display: none; flex-direction: column; align-items: stretch; gap: 0; padding: 7px 16px 12px; border-bottom: 1px solid var(--line); background: var(--paper); }
+			.main-nav.is-open { display: flex; }
+			.main-nav a { padding: 13px 4px; border-bottom: 1px solid #e4e9e2; }
+			.main-nav a:last-child { border-bottom: 0; }
+		}
+		@media (max-width: 700px) {
+			.shell { width: min(100% - 32px, 520px); }
+			.header-inner { min-height: 66px; gap: 10px; }
+			.brand { font-size: 18px; }
+			.header-actions { gap: 5px; }
+			.header-actions .button-outline { display: none; }
+			.header-actions .button { min-height: 39px; padding-inline: 11px; font-size: 11px; }
+			.mobile-toggle { display: inline-grid; place-items: center; }
+			.main-nav { position: absolute; top: 65px; right: 0; left: 0; display: none; flex-direction: column; align-items: stretch; gap: 0; padding: 7px 16px 12px; border-bottom: 1px solid var(--line); background: var(--paper); }
+			.main-nav.is-open { display: flex; }
+			.main-nav a { padding: 13px 4px; border-bottom: 1px solid #e4e9e2; }
+			.main-nav a:last-child { border-bottom: 0; }
+			.hero { padding-block: 35px 42px; }
+			.hero-grid { grid-template-columns: 1fr; gap: 27px; }
+			h1 { max-width: 480px; margin-block: 16px; font-size: 45px; }
+			.hero-copy { margin-bottom: 19px; font-size: 14px; }
+			.hero-ad-stage { aspect-ratio: 16 / 11; }
+			.hero-ad-copy { right: 14px; bottom: 60px; left: 14px; }
+			.hero-ad-copy strong { font-size: 19px; }
+			.hero-ad-tools { flex-wrap: wrap; gap: 8px; }
+			.hero-ad-credit { flex-basis: 100%; margin-left: 0; text-align: left; }
+			.trust-inner { grid-template-columns: 1fr 1fr; padding-block: 16px; gap: 13px; }
+			.trust-item { justify-content: flex-start; font-size: 10px; }
+			.trust-item b { font-size: 15px; }
+			.section { padding-block: 63px; }
+			.care-notes-heading { display: block; }
+			.care-notes-heading h2 { font-size: 31px; }
+			.care-notes-heading p { margin-top: 11px; font-size: 13px; }
+			.care-note-grid { grid-template-columns: 1fr; gap: 12px; margin-top: 23px; }
+			.care-note { display: grid; grid-template-columns: 38% 1fr; }
+			.care-note-visual { height: 100%; min-height: 210px; }
+			.care-note-content { min-height: 210px; padding: 15px; }
+			.care-note-content h3 { font-size: 16px; }
+			.agent-layout { grid-template-columns: 1fr; gap: 26px; }
+			.agent-copy h2 { font-size: 31px; }
+			.agent-form { padding: 18px; }
+			.section-heading { display: block; margin-bottom: 23px; }
+			.section-heading h2, .approach h2 { font-size: 31px; }
+			.section-heading p { margin-top: 11px; font-size: 13px; }
+			.service-grid { gap: 10px; }
+			.service-image { height: 120px; }
+			.service-content { padding: 13px 11px 11px; }
+			.service-content h3 { font-size: 14px; }
+			.service-content p { min-height: 56px; font-size: 11px; }
+			.service-bottom { align-items: end; }
+			.service-price { font-size: 9px; }
+			.service-price strong { font-size: 12px; }
+			.book-button { padding-inline: 8px; }
+			.approach-inner, .help-grid { grid-template-columns: 1fr; gap: 30px; }
+			.steps { gap: 8px; }
+			.step { min-height: 168px; padding: 14px 10px; }
+			.step h3 { margin-top: 21px; font-size: 12px; }
+			.step p { font-size: 10px; }
+			.support-panel { padding: 19px; }
+			.footer-inner { flex-wrap: wrap; }
+			.footer-inner p { order: 3; width: 100%; }
+			.footer-links { margin-left: auto; gap: 12px; }
+			.dialog-grid { display: block; min-height: unset; }
+			.service-detail-layout { min-height: unset; grid-template-columns: 1fr; }
+			.service-detail-visual { min-height: 190px; }
+			.service-detail-visual img { height: 190px; }
+			.service-detail-content { padding: 21px 20px 23px; }
+			.service-detail-content h2 { font-size: 24px; }
+			.service-facts { gap: 6px; }
+			.service-fact { padding: 9px 7px; }
+			.service-fact strong { font-size: 11px; }
+			.service-detail-actions .button { flex: 1; }
+			.dialog-aside { min-height: 145px; padding: 18px; }
+			.dialog-aside blockquote { max-width: 290px; font-size: 19px; }
+			.dialog-aside .brand { display: none; }
+			.dialog-content { padding: 17px 20px 24px; }
+			.dialog-content h2 { margin-top: 12px; font-size: 23px; }
+			.auth-dialog { max-height: calc(100% - 20px); }
+		}
+		@media (max-width: 380px) {
+			.service-grid { grid-template-columns: 1fr; }
+			.service-image { height: 165px; }
+			.service-content p { min-height: 0; }
+			.agent-field-grid, .agent-service-choices { grid-template-columns: 1fr; }
+			.steps { grid-template-columns: 1fr; }
+			.step { min-height: 130px; }
+			.step h3 { margin-top: 15px; }
+			.hero-actions .button { flex: 1; }
+			.filter-button { padding-inline: 10px; }
+		}
+		@media (prefers-reduced-motion: reduce) {
+			*, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+			.reveal { opacity: 1; transform: none; }
+		}
+	</style>
+</head>
+<body>
+	<dialog class="welcome-screen" id="welcomeScreen" aria-label="Morrow welcome">
+		<div class="welcome-grain" aria-hidden="true"></div>
+		<div class="welcome-content">
+			<div class="welcome-brand" aria-label="Morrow">
+				<span class="brand-mark welcome-brand-mark" aria-hidden="true"></span>
+				<span class="welcome-name" aria-hidden="true">Morrow</span>
+			</div>
+			<nav class="welcome-actions" aria-label="Account actions">
+				<button class="welcome-action" id="welcomeLogin" type="button" autofocus>Log in <span class="welcome-arrow" aria-hidden="true">↗</span></button>
+				<button class="welcome-action welcome-action-primary" id="welcomeRegister" type="button">Create account <span class="welcome-arrow" aria-hidden="true">↗</span></button>
+			</nav>
+		</div>
+		<div class="welcome-rule" aria-hidden="true"></div>
+	</dialog>
+
+	<header class="site-header">
+		<div class="shell header-inner">
+			<a class="brand" href="#top" aria-label="Morrow Home Services home">
+				<span class="brand-mark" aria-hidden="true"></span>
+				<span>Morrow<small>Home services</small></span>
+			</a>
+			<nav class="main-nav" id="mainNav" aria-label="Main navigation">
+				<a href="#top">Home</a>
+				<a href="#services">Services</a>
+				<a href="#approach">How it works</a>
+				<a href="#home-care">Home care notes</a>
+				<a href="#join">Join as a pro</a>
+				<a href="/about">About</a>
+				<a href="#help">Help & support</a>
+			</nav>
+			<div class="header-actions">
+				<button class="button button-text" id="headerLogin" type="button" data-open-auth="login">Log in</button>
+				<button class="button button-dark" id="headerRegister" type="button" data-open-auth="register">Create account <span aria-hidden="true">→</span></button>
+				<button class="mobile-toggle" id="mobileToggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="mainNav">☰</button>
+			</div>
+		</div>
+	</header>
+
+	<main id="top">
+		<section class="hero shell" aria-labelledby="heroTitle">
+			<div class="hero-grid">
+				<div class="hero-copy-block">
+					<span class="eyebrow">Your home, handled</span>
+					<h1 id="heroTitle">Good help.<br><em>Right at home.</em></h1>
+					<p class="hero-copy">From the little fixes to the weekend-long projects, find trusted local pros who take good care of your space.</p>
+					<div class="hero-actions">
+						<a class="button button-dark" href="#services">Explore services <span aria-hidden="true">↓</span></a>
+						<button class="button button-outline" type="button" data-open-auth="register">Get started <span aria-hidden="true">→</span></button>
+					</div>
+					<div class="hero-proof"><span><strong>Junagadh, Gujarat</strong> · Home services close to home</span></div>
+				</div>
+				<div class="hero-ad">
+					<div class="hero-ad-stage" id="heroAdStage">
+						<video class="hero-ad-video" id="heroAdVideo" controls playsinline preload="none" poster="https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=1100&q=84" aria-label="Morrow home services advertisement showing a home renovation">
+							<source src="https://videos.pexels.com/video-files/9807763/9807763-sd_640_360_30fps.mp4" type="video/mp4">
+							Your browser does not support embedded video. <a href="https://www.pexels.com/video/a-man-renovating-a-ceiling-9807763/">View the clip on Pexels.</a>
+						</video>
+						<span class="hero-ad-brand">MORROW HOME SERVICES · JUNAGADH</span>
+						<div class="hero-ad-copy" aria-hidden="true"><span>REPAIRS · CLEANING · HOME CARE</span><strong>Make room for the life happening at home.</strong></div>
+						<button class="hero-ad-play" id="heroAdPlay" type="button"><span aria-hidden="true">▶</span> Watch with sound</button>
+					</div>
+					<div class="hero-ad-tools">
+						<button class="hero-ad-sound" id="heroAdSound" type="button" aria-pressed="true">Sound on</button>
+						<label class="hero-ad-volume" for="heroAdVolume">Volume<input id="heroAdVolume" type="range" min="0" max="1" step="0.05" value="0.45" aria-label="Advertisement soundtrack volume"></label>
+						<span class="hero-ad-credit">Music: <a href="https://mixkit.co/free-stock-music/ambient/" target="_blank" rel="noopener noreferrer">Arulo · Mixkit</a> · Video: <a href="https://www.pexels.com/video/a-man-renovating-a-ceiling-9807763/" target="_blank" rel="noopener noreferrer">Pexels</a></span>
+					</div>
+					<audio id="heroAdSoundtrack" preload="none" loop><source src="https://assets.mixkit.co/music/292/292.mp3" type="audio/mpeg"></audio>
+				</div>
+			</div>
+		</section>
+
+		<section class="trust-band" aria-label="Morrow service standards">
+			<div class="shell trust-inner">
+				<div class="trust-item"><b>01</b><span>Home repairs & maintenance</span></div>
+				<div class="trust-item"><b>02</b><span>Home & deep cleaning</span></div>
+				<div class="trust-item"><b>03</b><span>Painting & improvements</span></div>
+				<div class="trust-item"><b>04</b><span>Lawn & garden care</span></div>
+			</div>
+		</section>
+
+		<section class="section shell" id="services" aria-labelledby="servicesTitle">
+			<div class="section-heading reveal">
+				<div><span class="eyebrow">A little help goes a long way</span><h2 id="servicesTitle">What can we take<br>off your list?</h2></div>
+				<p>Thoughtful help for the everyday things that keep a home feeling like yours. Pick a service to see where to start.</p>
+			</div>
+			<div class="filter-bar" role="group" aria-label="Filter services">
+				<button class="filter-button" type="button" data-filter="all" aria-pressed="true">All services</button>
+				<button class="filter-button" type="button" data-filter="repairs" aria-pressed="false">Repairs</button>
+				<button class="filter-button" type="button" data-filter="cleaning" aria-pressed="false">Cleaning</button>
+				<button class="filter-button" type="button" data-filter="improvements" aria-pressed="false">Improvements</button>
+				<button class="filter-button" type="button" data-filter="outdoor" aria-pressed="false">Outdoor</button>
+			</div>
+			<p class="pricing-note">Prices are starting estimates for small jobs. New customers get 10% off their first confirmed quote; the final amount is shown before payment.</p>
+			<div class="service-grid" id="serviceGrid">
+				<article class="service-card reveal" data-category="repairs">
+					<div class="service-image"><img src="https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&w=700&q=82" alt="Tools and fixtures for home plumbing work" loading="lazy"><span class="service-type">REPAIRS</span></div>
+					<div class="service-content"><h3>Plumbing & repairs</h3><p>Leaky taps, running toilets, and the fixes you keep putting off.</p><div class="service-bottom"><span class="service-price">STARTS AT<strong>₹199</strong></span><button class="book-button" type="button" data-book="Plumbing & repairs">Choose service →</button></div></div>
+				</article>
+				<article class="service-card reveal" data-category="repairs">
+					<div class="service-image"><img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=700&q=82" alt="An electrician working on a home electrical panel" loading="lazy"><span class="service-type">REPAIRS</span></div>
+					<div class="service-content"><h3>Electrical help</h3><p>Lighting, outlets, and safe solutions from a licensed pro.</p><div class="service-bottom"><span class="service-price">STARTS AT<strong>₹249</strong></span><button class="book-button" type="button" data-book="Electrical help">Choose service →</button></div></div>
+				</article>
+				<article class="service-card reveal" data-category="cleaning">
+					<div class="service-image"><img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=700&q=82" alt="A professional cleaning a bright home" loading="lazy"><span class="service-type">CLEANING</span></div>
+					<div class="service-content"><h3>Home cleaning</h3><p>A fresh reset, a move-out clean, or a regular helping hand.</p><div class="service-bottom"><span class="service-price">STARTS AT<strong>₹199</strong></span><button class="book-button" type="button" data-book="Home cleaning">Choose service →</button></div></div>
+				</article>
+				<article class="service-card reveal" data-category="improvements">
+					<div class="service-image"><img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=700&q=82" alt="Fresh paint being applied to a home interior" loading="lazy"><span class="service-type">IMPROVEMENTS</span></div>
+					<div class="service-content"><h3>Painting & refresh</h3><p>Give a room a new feeling with careful prep and a clean finish.</p><div class="service-bottom"><span class="service-price">STARTS AT<strong>₹249</strong></span><button class="book-button" type="button" data-book="Painting & refresh">Choose service →</button></div></div>
+				</article>
+				<article class="service-card reveal" data-category="repairs">
+					<div class="service-image"><img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=700&q=82" alt="Technician servicing home heating and cooling equipment" loading="lazy"><span class="service-type">REPAIRS</span></div>
+					<div class="service-content"><h3>Heating & cooling</h3><p>Seasonal tune-ups and help keeping your home comfortable.</p><div class="service-bottom"><span class="service-price">STARTS AT<strong>₹249</strong></span><button class="book-button" type="button" data-book="Heating & cooling">Choose service →</button></div></div>
+				</article>
+				<article class="service-card reveal" data-category="repairs">
+					<div class="service-image"><img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=700&q=82" alt="Home repair professional working with tools" loading="lazy"><span class="service-type">REPAIRS</span></div>
+					<div class="service-content"><h3>Handyman visits</h3><p>Small fixes, hanging shelves, and the to-do list odds and ends.</p><div class="service-bottom"><span class="service-price">STARTS AT<strong>₹199</strong></span><button class="book-button" type="button" data-book="Handyman visits">Choose service →</button></div></div>
+				</article>
+				<article class="service-card reveal" data-category="repairs">
+					<div class="service-image"><img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=700&q=82" alt="Technician inspecting household equipment" loading="lazy"><span class="service-type">REPAIRS</span></div>
+					<div class="service-content"><h3>Appliance repair</h3><p>Get help troubleshooting the appliances your home relies on.</p><div class="service-bottom"><span class="service-price">STARTS AT<strong>₹249</strong></span><button class="book-button" type="button" data-book="Appliance repair">Choose service →</button></div></div>
+				</article>
+				<article class="service-card reveal" data-category="cleaning">
+					<div class="service-image"><img src="https://images.unsplash.com/photo-1563453392212-326f5e854473?auto=format&fit=crop&w=700&q=82" alt="Supplies ready for a detailed home cleaning" loading="lazy"><span class="service-type">CLEANING</span></div>
+					<div class="service-content"><h3>Deep cleaning</h3><p>A more thorough reset for kitchens, bathrooms, and busy spaces.</p><div class="service-bottom"><span class="service-price">STARTS AT<strong>₹299</strong></span><button class="book-button" type="button" data-book="Deep cleaning">Choose service →</button></div></div>
+				</article>
+				<article class="service-card reveal" data-category="cleaning">
+					<div class="service-image"><img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=700&q=82" alt="Home cleaner making a window shine" loading="lazy"><span class="service-type">CLEANING</span></div>
+					<div class="service-content"><h3>Window washing</h3><p>Clear away dust and water marks for brighter rooms and views.</p><div class="service-bottom"><span class="service-price">STARTS AT<strong>₹199</strong></span><button class="book-button" type="button" data-book="Window washing">Choose service →</button></div></div>
+				</article>
+				<article class="service-card reveal" data-category="improvements">
+					<div class="service-image"><img src="https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=700&q=82" alt="Thoughtfully arranged furniture in a finished room" loading="lazy"><span class="service-type">IMPROVEMENTS</span></div>
+					<div class="service-content"><h3>Furniture assembly</h3><p>Get new furniture put together and ready to use without the hassle.</p><div class="service-bottom"><span class="service-price">STARTS AT<strong>₹249</strong></span><button class="book-button" type="button" data-book="Furniture assembly">Choose service →</button></div></div>
+				</article>
+				<article class="service-card reveal" data-category="improvements">
+					<div class="service-image"><img src="https://images.unsplash.com/photo-1558008258-3256797b43f3?auto=format&fit=crop&w=700&q=82" alt="Smart home controls installed in a modern home" loading="lazy"><span class="service-type">IMPROVEMENTS</span></div>
+					<div class="service-content"><h3>Smart home setup</h3><p>Set up doorbells, thermostats, and connected home devices.</p><div class="service-bottom"><span class="service-price">STARTS AT<strong>₹299</strong></span><button class="book-button" type="button" data-book="Smart home setup">Choose service →</button></div></div>
+				</article>
+				<article class="service-card reveal" data-category="outdoor">
+					<div class="service-image"><img src="https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=700&q=82" alt="Freshly maintained green lawn and garden" loading="lazy"><span class="service-type">OUTDOOR</span></div>
+					<div class="service-content"><h3>Lawn & garden care</h3><p>Seasonal yard tidy-ups, basic lawn care, and garden refreshes.</p><div class="service-bottom"><span class="service-price">STARTS AT<strong>₹199</strong></span><button class="book-button" type="button" data-book="Lawn & garden care">Choose service →</button></div></div>
+				</article>
+			</div>
+		</section>
+
+		<section class="approach section" id="approach" aria-labelledby="approachTitle">
+			<div class="shell approach-inner">
+				<div class="reveal"><span class="eyebrow">Simple from the start</span><h2 id="approachTitle">A better way to<br>get things done.</h2><p class="approach-copy">No phone tag. No wondering what comes next. Just a clear path from “I need a hand” to “that’s taken care of.”</p></div>
+				<div class="steps reveal">
+					<article class="step"><span class="step-number">1</span><h3>Tell us what you need</h3><p>Choose a service and share a few details about your home.</p></article>
+					<article class="step"><span class="step-number">2</span><h3>Meet your local pro</h3><p>Review your options and choose a time that works for you.</p></article>
+					<article class="step"><span class="step-number">3</span><h3>Enjoy the done</h3><p>Your pro handles the work. You get your time back.</p></article>
+				</div>
+			</div>
+		</section>
+
+		<section class="care-notes section" id="home-care" aria-labelledby="careNotesTitle">
+			<div class="shell care-notes-inner">
+				<div class="care-notes-heading reveal">
+					<div><span class="eyebrow">The Morrow field notes</span><h2 id="careNotesTitle">A little home know-how<br>goes a long way.</h2></div>
+					<p>Small, useful reminders for the jobs around the house. Start with a quick check, then ask for help when a task needs an extra pair of hands.</p>
+				</div>
+				<div class="care-note-grid">
+					<article class="care-note reveal">
+						<div class="care-note-visual"><img src="https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&w=800&q=82" alt="Close-up of plumbing fixtures in a home" loading="lazy"><span class="care-note-number">01</span></div>
+						<div class="care-note-content"><span class="care-note-kicker">A quick check · Repairs</span><h3>Catch a small leak early</h3><p>Look under sinks and around taps for fresh water marks. A photo and a note about when it appears can help explain the issue.</p><a class="care-note-link" href="#services">Explore repair help <span aria-hidden="true">→</span></a></div>
+					</article>
+					<article class="care-note reveal">
+						<div class="care-note-visual"><img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=800&q=82" alt="A freshly painted interior wall" loading="lazy"><span class="care-note-number">02</span></div>
+						<div class="care-note-content"><span class="care-note-kicker">Before you begin · Refresh</span><h3>Make room for a fresh coat</h3><p>Move smaller items out of the way and note any spots that need extra attention. It makes it easier to describe the room and your plans.</p><a class="care-note-link" href="#services">Explore painting help <span aria-hidden="true">→</span></a></div>
+					</article>
+					<article class="care-note reveal">
+						<div class="care-note-visual"><img src="https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=800&q=82" alt="A maintained lawn and garden" loading="lazy"><span class="care-note-number">03</span></div>
+						<div class="care-note-content"><span class="care-note-kicker">Weekend reset · Outdoors</span><h3>Give the garden a tidy-up</h3><p>Clear fallen leaves from ground-level drains and gather dry clippings. Keep ladders and electrical equipment out of DIY jobs.</p><a class="care-note-link" href="#services">Explore garden care <span aria-hidden="true">→</span></a></div>
+					</article>
+				</div>
+			</div>
+		</section>
+
+		<section class="agent-section section" id="join" aria-labelledby="agentTitle">
+			<div class="shell agent-layout">
+				<div class="agent-copy reveal">
+					<span class="eyebrow">Work with Morrow</span>
+					<h2 id="agentTitle">Good work belongs<br>close to home.</h2>
+					<p>Are you an experienced home-service professional in Junagadh? Send an application with your skills and service area. Morrow reviews applications and contacts people about next steps.</p>
+					<div class="agent-points">
+						<div class="agent-point"><b>01</b><span>Choose the service categories you work in.</span></div>
+						<div class="agent-point"><b>02</b><span>Share your experience and the areas you cover.</span></div>
+						<div class="agent-point"><b>03</b><span>Applications are reviewed; submitting one does not guarantee work.</span></div>
+					</div>
+				</div>
+				<form class="agent-form reveal" id="agentForm">
+					<h3>Apply as a service professional</h3>
+					<p class="agent-form-intro">Share a few details so the Morrow team can review your application.</p>
+					<div class="agent-field-grid">
+						<div class="field"><label for="agentName">Full name</label><input id="agentName" name="name" autocomplete="name" maxlength="100" required></div>
+						<div class="field"><label for="agentEmail">Email</label><input id="agentEmail" name="email" type="email" autocomplete="email" maxlength="254" required></div>
+						<div class="field"><label for="agentPhone">Mobile number</label><input id="agentPhone" name="phone" type="tel" inputmode="tel" pattern="(\+91[ -]?)?[6-9]([ -]?[0-9]){9}" title="Enter a 10-digit Indian mobile number, optionally starting with +91." required></div>
+						<div class="field"><label for="agentArea">Service area</label><input id="agentArea" name="service_area" placeholder="Area or neighborhood" maxlength="120" required></div>
+					</div>
+					<fieldset class="agent-service-choices">
+						<legend>Services you can provide</legend>
+						<label><input type="checkbox" name="services" value="Plumbing & repairs"> Plumbing & repairs</label>
+						<label><input type="checkbox" name="services" value="Electrical help"> Electrical help</label>
+						<label><input type="checkbox" name="services" value="Home cleaning"> Home cleaning</label>
+						<label><input type="checkbox" name="services" value="Painting & refresh"> Painting & refresh</label>
+						<label><input type="checkbox" name="services" value="Heating & cooling"> Heating & cooling</label>
+						<label><input type="checkbox" name="services" value="Handyman visits"> Handyman visits</label>
+						<label><input type="checkbox" name="services" value="Appliance repair"> Appliance repair</label>
+						<label><input type="checkbox" name="services" value="Deep cleaning"> Deep cleaning</label>
+						<label><input type="checkbox" name="services" value="Window washing"> Window washing</label>
+						<label><input type="checkbox" name="services" value="Furniture assembly"> Furniture assembly</label>
+						<label><input type="checkbox" name="services" value="Smart home setup"> Smart home setup</label>
+						<label><input type="checkbox" name="services" value="Lawn & garden care"> Lawn & garden care</label>
+					</fieldset>
+					<div class="field"><label for="agentExperience">Relevant experience</label><textarea id="agentExperience" name="experience" maxlength="1500" placeholder="Tell us about your work and experience." required></textarea></div>
+					<label class="check-label agent-consent"><input id="agentContactConsent" name="contact_consent" type="checkbox" value="true" required> Morrow may contact me about this application.</label>
+					<button class="button button-dark agent-submit" type="submit">Send application <span aria-hidden="true">→</span></button>
+					<p class="agent-form-note">Applications are reviewed by Morrow. No service work or payment is guaranteed by applying.</p>
+				</form>
+			</div>
+		</section>
+
+		<section class="help-section section" id="help" aria-labelledby="helpTitle">
+			<div class="shell help-grid">
+				<div class="reveal">
+					<span class="eyebrow">Here when you need us</span>
+					<h2 class="section-heading" style="display:block;margin:12px 0 0"><span id="helpTitle" style="font:600 38px/1.16 var(--display);color:var(--ink)">A few good answers.</span></h2>
+					<div class="faq-list">
+						<details><summary>How do you choose service professionals?</summary><p>We look for relevant experience, references, and the right credentials for each service. In a production version, screening and insurance checks would be handled by the service platform.</p></details>
+						<details><summary>Can I choose a time that works for me?</summary><p>Choose a preferred date and time window. Morrow will review your request and contact you to confirm availability.</p></details>
+						<details><summary>What happens after I request a service?</summary><p>Your request is saved as pending. It is not a confirmed appointment until Morrow contacts you.</p></details>
+						<details><summary>Can I see my service requests?</summary><p>Sign in to your Morrow account to see the latest requests and their current status.</p></details>
+					</div>
+				</div>
+				<form class="support-panel reveal" id="helpForm">
+					<h3>Contact Morrow support</h3>
+					<p>Reach us by email or phone, or send a note using the form below.</p>
+					<div class="contact-details" aria-label="Morrow contact details">
+						<div class="contact-detail"><span>Email</span><a href="mailto:shyamghoniya@gmail.com">shyamghoniya@gmail.com</a></div>
+						<div class="contact-detail"><span>Phone</span><a href="tel:+91927032030">927032030</a></div>
+						<div class="contact-detail"><span>Support hours</span><p>To be confirmed</p></div>
+					</div>
+					<p class="contact-placeholder">Reach us by email or phone and we’ll get back to you as soon as possible.</p>
+					<div class="field"><label for="helpName">Your name</label><input id="helpName" name="name" autocomplete="name" placeholder="Alex Morgan" required></div>
+					<div class="field"><label for="helpEmail">Email address</label><input id="helpEmail" name="email" type="email" autocomplete="email" placeholder="alex@example.com" required></div>
+					<div class="field"><label for="helpMessage">How can we help?</label><textarea id="helpMessage" name="message" placeholder="Tell us a little about what you need..." required></textarea></div>
+					<button class="button button-dark support-submit" type="submit">Send a message <span aria-hidden="true">→</span></button>
+					<p class="form-note">Your message is stored securely for the Morrow support team.</p>
+				</form>
+			</div>
+		</section>
+	</main>
+
+	<footer class="site-footer">
+		<div class="shell footer-inner">
+			<a class="brand footer-brand" href="#top"><span class="brand-mark" aria-hidden="true"></span><span>Morrow<small>Home services</small></span></a>
+			<p>Good help. Right at home. · Junagadh, Gujarat · © <span id="year"></span> Morrow Home Services.</p>
+			<nav class="footer-links" aria-label="Footer navigation"><a href="#services">Services</a><a href="#join">Join as a pro</a><a href="#help">Help</a><a href="/about">About</a><a href="/terms">Terms</a><a href="/privacy">Privacy</a><a href="/cookies">Cookies</a><a href="/admin" style="color:#d6f5d3; font-weight:700;">Dashboard</a><button class="text-button" type="button" data-open-auth="login" style="color:#d5e0d9">Log in</button></nav>
+		</div>
+	</footer>
+
+	<dialog class="service-dialog" id="serviceDialog" aria-labelledby="serviceDetailTitle">
+		<div class="service-detail-layout">
+			<div class="service-detail-visual">
+				<img id="serviceDetailImage" alt="">
+				<span class="service-detail-category" id="serviceDetailCategory"></span>
+				<button class="service-dialog-close" id="serviceDialogClose" type="button" aria-label="Close service details">×</button>
+			</div>
+			<div class="service-detail-content">
+				<span class="eyebrow">Service details</span>
+				<h2 id="serviceDetailTitle"></h2>
+				<p class="service-detail-summary" id="serviceDetailSummary"></p>
+				<div class="service-facts">
+					<div class="service-fact"><span>Typical time</span><strong id="serviceDetailDuration"></strong></div>
+					<div class="service-fact"><span>Team size</span><strong id="serviceDetailWorkers"></strong></div>
+					<div class="service-fact"><span>Area</span><strong>Junagadh</strong></div>
+				</div>
+				<p class="service-estimate">Starting estimate <strong id="serviceDetailPrice"></strong></p>
+				<div class="service-offer"><strong>First request offer · 10% off</strong><br>Applied to your confirmed quote before payment. The estimate above is a starting price, not a final quote.</div>
+				<h3>What to expect</h3>
+				<ul class="service-inclusions" id="serviceDetailInclusions"></ul>
+				<p class="service-detail-note" id="serviceDetailNote"></p>
+				<div class="service-detail-actions">
+					<button class="button button-dark" id="serviceDetailBook" type="button">Continue to booking <span aria-hidden="true">→</span></button>
+					<button class="button button-outline" id="serviceDetailCancel" type="button">Not now</button>
+				</div>
+			</div>
+		</div>
+	</dialog>
+
+	<dialog class="auth-dialog" id="authDialog" aria-labelledby="authTitle">
+		<div class="dialog-grid">
+			<aside class="dialog-aside"><a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"></span><span>Morrow<small>Home services</small></span></a><blockquote>“It feels good to know the little things are in good hands.”<span>— A Morrow neighbor</span></blockquote></aside>
+			<div class="dialog-content">
+				<div class="dialog-top"><button class="close-button" id="closeDialog" type="button" aria-label="Close dialog">×</button></div>
+				<h2 id="authTitle">Welcome back</h2>
+				<p class="dialog-intro" id="authIntro">Sign in to continue to your home services.</p>
+				<div class="auth-tabs" role="tablist" aria-label="Account options" id="authTabs">
+					<button class="auth-tab" type="button" role="tab" id="loginTab" aria-selected="true" data-auth-mode="login">Log in</button>
+					<button class="auth-tab" type="button" role="tab" id="registerTab" aria-selected="false" data-auth-mode="register">Create account</button>
+				</div>
+				<form id="authForm">
+					<div class="field" id="nameField" hidden><label for="authName">Full name</label><input id="authName" name="name" autocomplete="name" placeholder="Alex Morgan"></div>
+					<div class="field"><label for="authEmail">Email address</label><input id="authEmail" name="email" type="email" autocomplete="email" placeholder="you@example.com" required></div>
+					<div class="field"><label for="authPassword">Password</label><div class="password-wrap"><input id="authPassword" name="password" type="password" autocomplete="current-password" minlength="8" placeholder="At least 8 characters" required><button class="password-toggle" id="passwordToggle" type="button" aria-label="Show password">Show</button></div></div>
+					<div class="auth-options" id="loginOptions"><span>Need help signing in?</span><button class="text-button" id="forgotPassword" type="button">Contact support</button></div>
+					<div class="field" id="termsField" hidden><label class="check-label"><input id="termsCheck" type="checkbox"> I agree to Morrow’s account and privacy terms.</label></div>
+					<button class="button button-dark auth-submit" id="authSubmit" type="submit">Log in <span aria-hidden="true">→</span></button>
+					<p class="auth-disclaimer">Passwords are stored as salted hashes. Use a unique password for your account.</p>
+				</form>
+				<form class="booking-view" id="bookingForm" hidden>
+					<h3>Request a service</h3>
+					<p class="booking-intro">Choose a preferred time. This request stays pending until Morrow confirms availability.</p>
+					<div class="booking-service">Selected service<strong id="bookingService"></strong></div>
+					<div class="field"><label for="bookingAddress">Service address in Junagadh</label><input id="bookingAddress" name="address" autocomplete="street-address" minlength="8" maxlength="400" placeholder="House, street, and area" required></div>
+					<div class="field"><label for="bookingPhone">Mobile number</label><input id="bookingPhone" name="phone" type="tel" inputmode="tel" pattern="(\+91[ ]?)?[6-9][0-9]{9}" placeholder="+91 98765 43210" title="Enter a 10-digit Indian mobile number, optionally starting with +91." required></div>
+					<div class="field"><label for="bookingPaymentMethod">Preferred payment method</label><select id="bookingPaymentMethod" name="payment_method" required><option value="online">Online payment via Razorpay</option><option value="offline">Offline payment after confirmation</option></select></div>
+					<div class="field"><label for="bookingDate">Preferred date</label><input id="bookingDate" name="preferred_date" type="date" required></div>
+					<div class="field"><label for="bookingWindow">Preferred time window</label><select id="bookingWindow" name="preferred_window" required><option value="">Choose a time window</option><option value="morning">Morning · 9am-12pm</option><option value="afternoon">Afternoon · 12pm-4pm</option><option value="evening">Evening · 4pm-7pm</option></select></div>
+					<div class="field"><label for="bookingNotes">Anything else to know? <span>(optional)</span></label><textarea id="bookingNotes" name="notes" maxlength="1000" placeholder="Share details that may help us prepare."></textarea></div>
+					<p class="payment-method-note">Payment options: secure online checkout when available, or cash / offline payment after Morrow confirms your request.</p>
+					<button class="button button-dark auth-submit" type="submit">Send service request <span aria-hidden="true">→</span></button>
+				</form>
+				<section class="account-view" id="accountView" hidden aria-live="polite">
+					<h3 id="accountWelcome">Your Morrow account</h3>
+					<p class="account-intro">Your recent service requests. Requests remain pending until Morrow confirms them.</p>
+					<div class="request-list" id="requestList"></div>
+					<div class="account-actions"><button class="button button-outline" id="accountLogout" type="button">Log out</button><button class="button button-dark" id="accountClose" type="button">Done</button></div>
+				</section>
+				<div class="success-state" id="authSuccess" hidden aria-live="polite"><span class="success-mark" aria-hidden="true">✓</span><h3 id="successTitle">Request received</h3><p id="successMessage"></p><button class="button button-dark" id="successClose" type="button">Continue</button></div>
+			</div>
+		</div>
+	</dialog>
+	<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+	<script>
+		const welcomeScreen = document.querySelector("#welcomeScreen");
+		const welcomeUrl = new URLSearchParams(window.location.search);
+		const welcomeHasReturnLink = welcomeUrl.has("booking") || welcomeUrl.has("google");
+		function revealWelcomeScreen() {
+			welcomeScreen.classList.remove("is-closing");
+			if (!welcomeScreen.open) {
+				welcomeScreen.showModal();
+			}
+			requestAnimationFrame(() => {
+				welcomeScreen.classList.add("is-visible");
+			});
+		}
+		function hideWelcomeScreen() {
+			welcomeScreen.classList.remove("is-visible");
+			welcomeScreen.classList.add("is-closing");
+			window.setTimeout(() => {
+				if (welcomeScreen.open) {
+					welcomeScreen.close();
+				}
+				welcomeScreen.classList.remove("is-closing");
+			}, 220);
+		}
+		if (sessionStorage.getItem("morrowWelcomePassed") === "true" || welcomeHasReturnLink) {
+			sessionStorage.setItem("morrowWelcomePassed", "true");
+		} else {
+			revealWelcomeScreen();
+		}
+		welcomeScreen.addEventListener("cancel", (event) => event.preventDefault());
+
+		const authDialog = document.querySelector("#authDialog");
+		const serviceDialog = document.querySelector("#serviceDialog");
+		const authForm = document.querySelector("#authForm");
+		const bookingForm = document.querySelector("#bookingForm");
+		const accountView = document.querySelector("#accountView");
+		const authTitle = document.querySelector("#authTitle");
+		const authIntro = document.querySelector("#authIntro");
+		const nameField = document.querySelector("#nameField");
+		const authName = document.querySelector("#authName");
+		const termsField = document.querySelector("#termsField");
+		const termsCheck = document.querySelector("#termsCheck");
+		const loginOptions = document.querySelector("#loginOptions");
+		const authSubmit = document.querySelector("#authSubmit");
+		const authTabs = document.querySelector("#authTabs");
+		const authSuccess = document.querySelector("#authSuccess");
+		const successTitle = document.querySelector("#successTitle");
+		const successMessage = document.querySelector("#successMessage");
+		const requestList = document.querySelector("#requestList");
+		const headerLogin = document.querySelector("#headerLogin");
+		const headerRegister = document.querySelector("#headerRegister");
+		const toast = document.querySelector("#toast");
+		let authMode = "login";
+		let pendingService = "";
+		let pendingBookingId = "";
+		let selectedService = "";
+		let currentUser = null;
+		let googleLinkAvailable = false;
+		let csrfToken = "";
+		let toastTimer;
+
+		function showToast(message) {
+			toast.textContent = message;
+			toast.hidden = false;
+			window.clearTimeout(toastTimer);
+			toastTimer = window.setTimeout(() => { toast.hidden = true; }, 3600);
+		}
+
+		async function refreshCsrfToken() {
+			const response = await fetch("/api/csrf", { credentials: "same-origin" });
+			const result = await response.json();
+			if (!response.ok) throw new Error(result.error || "The Morrow server is unavailable.");
+			csrfToken = result.csrf_token;
+			return csrfToken;
+		}
+
+		async function getApi(path) {
+			const response = await fetch(path, { credentials: "same-origin" });
+			const result = await response.json().catch(() => ({}));
+			if (!response.ok) throw new Error(result.error || "The request could not be completed.");
+			return result;
+		}
+
+		async function postApi(path, payload) {
+			if (!csrfToken) await refreshCsrfToken();
+			const response = await fetch(path, {
+				method: "POST",
+				credentials: "same-origin",
+				headers: { "Content-Type": "application/json", "X-CSRF-Token": csrfToken },
+				body: JSON.stringify(payload),
+			});
+			const result = await response.json().catch(() => ({}));
+			if (result.csrf_token) csrfToken = result.csrf_token;
+			if (!response.ok) throw new Error(result.error || "The request could not be completed.");
+			return result;
+		}
+
+		function setDialogView(view) {
+			authForm.hidden = view !== "auth";
+			authTabs.hidden = view !== "auth";
+			bookingForm.hidden = view !== "booking";
+			accountView.hidden = view !== "account";
+			authSuccess.hidden = view !== "success";
+		}
+
+		function setCurrentUser(user) {
+			currentUser = user;
+			headerLogin.textContent = user ? "My account" : "Log in";
+			headerRegister.hidden = Boolean(user);
+		}
+
+		function showAccountView() {
+			setDialogView("account");
+			authTitle.textContent = "Your Morrow account";
+			authIntro.textContent = `Signed in as ${currentUser.email}`;
+			document.querySelector("#accountWelcome").textContent = `Hello, ${currentUser.name.split(" ")[0]}`;
+			if (!authDialog.open) authDialog.showModal();
+			loadBookings();
+		}
+
+		function localDateValue() {
+			const now = new Date();
+			const localNow = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
+			return localNow.toISOString().slice(0, 10);
+		}
+
+		function showBookingView() {
+			setDialogView("booking");
+			authTitle.textContent = "Plan your service visit";
+			authIntro.textContent = "Send a preferred time for Morrow to review and confirm.";
+			document.querySelector("#bookingService").textContent = pendingService;
+			bookingForm.reset();
+			document.querySelector("#bookingDate").min = localDateValue();
+			if (!authDialog.open) authDialog.showModal();
+		}
+
+		function showSuccess(title, message) {
+			setDialogView("success");
+			authTitle.textContent = title;
+			authIntro.textContent = "";
+			successTitle.textContent = title;
+			successMessage.textContent = message;
+		}
+
+		let razorpayScriptPromise;
+
+		function loadRazorpayCheckout() {
+			if (window.Razorpay) return Promise.resolve();
+			if (!razorpayScriptPromise) {
+				razorpayScriptPromise = new Promise((resolve, reject) => {
+					const script = document.createElement("script");
+					script.src = "https://checkout.razorpay.com/v1/checkout.js";
+					script.async = true;
+					script.onload = resolve;
+					script.onerror = () => {
+						razorpayScriptPromise = null;
+						reject(new Error("Razorpay checkout could not be loaded. Please try again."));
+					};
+					document.head.append(script);
+				});
+			}
+			return razorpayScriptPromise;
+		}
+
+		async function beginBookingPayment(booking, button) {
+			button.disabled = true;
+			try {
+				const order = await postApi(`/api/bookings/${booking.id}/payment/order`, {});
+				await loadRazorpayCheckout();
+				const checkout = new window.Razorpay({
+					key: order.key_id,
+					amount: order.amount,
+					currency: order.currency,
+					name: "Morrow Home Services",
+					description: `${order.service} · Booking #${booking.id}`,
+					order_id: order.order_id,
+					prefill: order.prefill,
+					theme: { color: "#163d35" },
+					handler: async (paymentResponse) => {
+						try {
+							await postApi(`/api/bookings/${booking.id}/payment/verify`, paymentResponse);
+							showToast("Payment confirmed. Morrow will coordinate your service visit.");
+							await loadBookings();
+						} catch (error) {
+							showToast(error.message);
+						}
+					},
+					modal: { ondismiss: () => showToast("Payment cancelled. Your request is still saved.") },
+				});
+				checkout.on("payment.failed", () => showToast("Payment was not completed. Your request is still saved."));
+				checkout.open();
+			} catch (error) {
+				showToast(error.message);
+			} finally {
+				button.disabled = false;
+			}
+		}
+
+		async function loadBookings() {
+			requestList.replaceChildren();
+			try {
+				const [result, paymentConfig] = await Promise.all([
+					getApi("/api/bookings"),
+					getApi("/api/payments/config"),
+				]);
+				if (result.bookings.length === 0) {
+					const empty = document.createElement("p");
+					empty.className = "account-intro";
+					empty.textContent = "You have no service requests yet.";
+					requestList.append(empty);
+					return;
+				}
+				result.bookings.forEach((booking) => {
+					const item = document.createElement("article");
+					item.className = "request-item";
+					const isLinkedBooking = String(booking.id) === pendingBookingId;
+					if (isLinkedBooking) item.classList.add("is-highlighted");
+					const service = document.createElement("strong");
+					service.textContent = booking.service;
+					const timing = document.createElement("span");
+					const day = new Date(`${booking.preferred_date}T12:00:00`).toLocaleDateString("en-IN", { dateStyle: "medium" });
+					timing.textContent = `${day} · ${booking.preferred_window}`;
+					const status = document.createElement("span");
+					status.className = "request-status";
+					const statusLabels = {
+						pending: "Waiting for Morrow to confirm",
+						awaiting_payment: "Final quote ready · payment due",
+						paid: "Paid · service coordination pending",
+					};
+					status.textContent = statusLabels[booking.status] || booking.status;
+					const paymentMethod = document.createElement("span");
+					const paymentMethodLabels = {
+						online: "Payment method: Online",
+						offline: "Payment method: Offline",
+					};
+					paymentMethod.className = "payment-method-note";
+					paymentMethod.textContent = paymentMethodLabels[booking.payment_method] || "Payment method: Online";
+					item.append(service, timing, status, paymentMethod);
+					if (booking.quote_amount_paise) {
+						const formatCurrency = (amount) => new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 2 }).format(amount / 100);
+						if (booking.discount_amount_paise) {
+							const baseQuote = document.createElement("span");
+						baseQuote.textContent = `Confirmed quote: ${formatCurrency(booking.quote_before_discount_paise)}`;
+						const savings = document.createElement("span");
+						savings.textContent = `First-request savings: −${formatCurrency(booking.discount_amount_paise)}`;
+						const amountDue = document.createElement("span");
+						amountDue.textContent = `Amount due: ${formatCurrency(booking.quote_amount_paise)}`;
+						item.append(baseQuote, savings, amountDue);
+						} else {
+							const quote = document.createElement("span");
+							quote.textContent = `Final quote: ${formatCurrency(booking.quote_amount_paise)}`;
+							item.append(quote);
+						}
+					}
+					if (booking.status === "awaiting_payment") {
+						if (paymentConfig.available) {
+							const methods = document.createElement("span");
+							methods.className = "payment-method-note";
+							methods.textContent = "Secure checkout: UPI, cards, net banking, and wallets where available.";
+							item.append(methods);
+						}
+						const paymentButton = document.createElement("button");
+						paymentButton.className = "button button-dark booking-pay-button";
+						paymentButton.type = "button";
+						paymentButton.disabled = !paymentConfig.available;
+						paymentButton.textContent = paymentConfig.available
+							? `Choose payment method · ${new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 2 }).format(booking.quote_amount_paise / 100)}`
+							: "Online payment setup pending";
+						paymentButton.addEventListener("click", () => beginBookingPayment(booking, paymentButton));
+						item.append(paymentButton);
+					}
+					requestList.append(item);
+					if (isLinkedBooking) item.scrollIntoView({ block: "nearest" });
+				});
+			} catch (error) {
+				showToast(error.message);
+			}
+		}
+
+		function setAuthMode(mode) {
+			authMode = mode;
+			const isRegister = mode === "register";
+			authTitle.textContent = isRegister ? "Create your Morrow account" : "Welcome back";
+			authIntro.textContent = pendingService
+				? `${isRegister ? "Create an account" : "Log in"} to request ${pendingService}.`
+				: isRegister ? "Create an account to request and track home services." : "Sign in to view your service requests.";
+			nameField.hidden = !isRegister;
+			authName.required = isRegister;
+			authName.autocomplete = isRegister ? "name" : "off";
+			termsField.hidden = !isRegister;
+			termsCheck.required = isRegister;
+			loginOptions.hidden = isRegister;
+			document.querySelector("#authPassword").autocomplete = isRegister ? "new-password" : "current-password";
+			document.querySelectorAll("[data-auth-mode]").forEach((tab) => {
+				tab.setAttribute("aria-selected", String(tab.dataset.authMode === mode));
+			});
+			authSubmit.innerHTML = `${isRegister ? "Create account" : "Log in"} <span aria-hidden="true">→</span>`;
+		}
+
+		function openAuth(mode, service = "") {
+			pendingService = service;
+			if (currentUser) {
+				if (service) showBookingView();
+				else showAccountView();
+				return;
+			}
+			authForm.reset();
+			setDialogView("auth");
+			setAuthMode(mode);
+			if (!authDialog.open) authDialog.showModal();
+		}
+
+		function enterSiteFromWelcome(mode) {
+			sessionStorage.setItem("morrowWelcomePassed", "true");
+			hideWelcomeScreen();
+			window.setTimeout(() => openAuth(mode), 220);
+		}
+
+		document.querySelector("#welcomeLogin").addEventListener("click", () => enterSiteFromWelcome("login"));
+		document.querySelector("#welcomeRegister").addEventListener("click", () => enterSiteFromWelcome("register"));
+
+		document.querySelectorAll("[data-open-auth]").forEach((button) => {
+			button.addEventListener("click", () => {
+				if (button.dataset.openAuth === "login" && currentUser) showAccountView();
+				else openAuth(button.dataset.openAuth);
+			});
+		});
+		document.querySelectorAll("[data-auth-mode]").forEach((tab) => {
+			tab.addEventListener("click", () => setAuthMode(tab.dataset.authMode));
+		});
+		document.querySelectorAll("[data-book]").forEach((button) => {
+			button.addEventListener("click", () => {
+				selectedService = button.dataset.book;
+				const details = {
+					"Plumbing & repairs": { duration: "1–2 hours", workers: "1 local pro", summary: "Help with common plumbing faults and small household repairs.", inclusions: ["Inspect the reported issue", "Basic repair to taps, leaks, or running toilets", "Test the repair before wrapping up"], note: "Replacement parts, concealed leaks, and larger repairs are quoted separately." },
+					"Electrical help": { duration: "1–2 hours", workers: "1 electrician", summary: "A focused visit for everyday lighting, outlet, and electrical concerns.", inclusions: ["Check the affected fixture or outlet", "Complete a small, accessible repair", "Explain any safety concerns found"], note: "New wiring, major faults, and replacement fixtures may need a separate quote." },
+					"Home cleaning": { duration: "2–4 hours", workers: "2 cleaners", summary: "A practical clean for lived-in homes, move-outs, and regular upkeep.", inclusions: ["Dust reachable surfaces", "Clean floors and common touch points", "Refresh kitchen and bathroom surfaces"], note: "Time depends on home size and condition. Add-on tasks are confirmed before the visit." },
+					"Painting & refresh": { duration: "1–2 days", workers: "2 painters", summary: "A tidy room refresh with preparation and a careful paint finish.", inclusions: ["Protect nearby floors and furniture", "Prepare one standard room", "Apply the agreed paint finish and tidy the work area"], note: "Paint, extensive wall repair, extra coats, and larger spaces affect the final quote." },
+					"Heating & cooling": { duration: "1–2 hours", workers: "1 technician", summary: "Seasonal checks and basic service to help keep your home comfortable.", inclusions: ["Inspect accessible heating or cooling equipment", "Clean basic filters where applicable", "Share findings and recommended next steps"], note: "Repairs, refrigerant, and replacement parts are not included in the starting estimate." },
+					"Handyman visits": { duration: "1–3 hours", workers: "1 handyman", summary: "One visit for a few small fixes and household to-do list items.", inclusions: ["Review the agreed task list", "Handle small fixes or simple installations", "Check completed work with you"], note: "Please list your tasks in the booking notes. Materials and complex work are extra." },
+					"Appliance repair": { duration: "1–2 hours", workers: "1 technician", summary: "Start with a diagnosis for an appliance that is not working as expected.", inclusions: ["Inspect one household appliance", "Check common causes and basic operation", "Explain repair options and parts needed"], note: "The starting estimate covers assessment; parts and repair work are quoted after diagnosis." },
+					"Deep cleaning": { duration: "4–6 hours", workers: "2 cleaners", summary: "A more detailed reset for kitchens, bathrooms, and high-use areas.", inclusions: ["Detail reachable surfaces and fixtures", "Clean kitchen and bathroom areas", "Vacuum or mop accessible floors"], note: "Very large homes, heavy buildup, and inside-appliance cleaning may change timing and price." },
+					"Window washing": { duration: "2–3 hours", workers: "2 cleaners", summary: "Clear dust and water marks from accessible residential windows.", inclusions: ["Clean reachable interior glass", "Wipe accessible frames and sills", "Check the finished windows with you"], note: "High-rise, exterior-at-height, and difficult-access windows are excluded from this estimate." },
+					"Furniture assembly": { duration: "1–3 hours", workers: "1 assembler", summary: "Get standard flat-pack furniture assembled and ready to use.", inclusions: ["Assemble one standard furniture item", "Use the supplied fittings and instructions", "Place the assembled item in the same room"], note: "Multiple or unusually complex items may need more time. Wall mounting is a separate task." },
+					"Smart home setup": { duration: "1–2 hours", workers: "1 technician", summary: "Set up and connect compatible smart devices you already own.", inclusions: ["Connect one or two compatible devices", "Help with app pairing and basic settings", "Check device connectivity before leaving"], note: "Devices, subscriptions, and network upgrades are not included. Keep your Wi-Fi details available." },
+					"Lawn & garden care": { duration: "2–4 hours", workers: "2 garden pros", summary: "A seasonal tidy-up for a small lawn or home garden.", inclusions: ["Collect light fallen leaves and debris", "Tidy accessible beds and lawn edges", "Leave the work area neat"], note: "Large plots, tree work, chemical treatments, and removal of heavy waste need a separate quote." },
+				};
+				const service = details[selectedService];
+				const card = button.closest(".service-card");
+				document.querySelector("#serviceDetailTitle").textContent = selectedService;
+				document.querySelector("#serviceDetailSummary").textContent = service.summary;
+				document.querySelector("#serviceDetailDuration").textContent = service.duration;
+				document.querySelector("#serviceDetailWorkers").textContent = service.workers;
+				document.querySelector("#serviceDetailCategory").textContent = card.querySelector(".service-type").textContent;
+				document.querySelector("#serviceDetailPrice").textContent = card.querySelector(".service-price strong").textContent;
+				const image = card.querySelector(".service-image img");
+				const detailImage = document.querySelector("#serviceDetailImage");
+				detailImage.src = image.src;
+				detailImage.alt = image.alt;
+				const inclusionList = document.querySelector("#serviceDetailInclusions");
+				inclusionList.replaceChildren(...service.inclusions.map((item) => {
+					const listItem = document.createElement("li");
+					listItem.textContent = item;
+					return listItem;
+				}));
+				document.querySelector("#serviceDetailNote").textContent = service.note;
+				serviceDialog.showModal();
+			});
+		});
+		document.querySelector("#serviceDetailBook").addEventListener("click", () => {
+			const service = selectedService;
+			serviceDialog.close();
+			openAuth("login", service);
+		});
+		document.querySelector("#serviceDialogClose").addEventListener("click", () => serviceDialog.close());
+		document.querySelector("#serviceDetailCancel").addEventListener("click", () => serviceDialog.close());
+		serviceDialog.addEventListener("click", (event) => {
+			if (event.target === serviceDialog) serviceDialog.close();
+		});
+		document.querySelector("#closeDialog").addEventListener("click", () => authDialog.close());
+		document.querySelector("#successClose").addEventListener("click", () => authDialog.close());
+		document.querySelector("#accountClose").addEventListener("click", () => authDialog.close());
+		document.querySelector("#accountLogout").addEventListener("click", async () => {
+			try {
+				await postApi("/api/logout", {});
+				setCurrentUser(null);
+				pendingService = "";
+				authDialog.close();
+				showToast("You have been logged out.");
+			} catch (error) {
+				showToast(error.message);
+			}
+		});
+		authDialog.addEventListener("click", (event) => {
+			if (event.target === authDialog) authDialog.close();
+		});
+
+		document.querySelector("#passwordToggle").addEventListener("click", (event) => {
+			const password = document.querySelector("#authPassword");
+			const visible = password.type === "text";
+			password.type = visible ? "password" : "text";
+			event.currentTarget.textContent = visible ? "Show" : "Hide";
+			event.currentTarget.setAttribute("aria-label", visible ? "Show password" : "Hide password");
+		});
+		document.querySelector("#forgotPassword").addEventListener("click", () => {
+			showToast("Password reset is not enabled yet. Please contact Morrow support.");
+		});
+
+		authForm.addEventListener("submit", async (event) => {
+			event.preventDefault();
+			if (!authForm.reportValidity()) return;
+			const payload = Object.fromEntries(new FormData(authForm));
+			payload.accept_terms = termsCheck.checked;
+			try {
+				const result = await postApi(`/api/${authMode}`, payload);
+				setCurrentUser(result.user);
+				const authMessage = authMode === "register" ? "Account created successfully and saved." : "You are now signed in.";
+			let googleMessage = "";
+				if (!result.user.google_connected) {
+					try {
+						const googleConfig = await getApi("/api/google/config");
+						googleLinkAvailable = googleConfig.available;
+					} catch {
+						googleLinkAvailable = false;
+						googleMessage = " Google linking could not be checked; your account is still signed in.";
+					}
+					if (googleLinkAvailable) {
+						sessionStorage.setItem("morrowAuthMessage", authMessage);
+						if (pendingService) sessionStorage.setItem("morrowPendingService", pendingService);
+						else sessionStorage.removeItem("morrowPendingService");
+						if (pendingBookingId) sessionStorage.setItem("morrowPendingBooking", pendingBookingId);
+						window.location.assign("/auth/google/connect");
+						return;
+					}
+					if (!googleMessage) googleMessage = " Google linking is not configured yet.";
+				}
+				showToast(`${authMessage}${googleMessage}`);
+				if (pendingService) showBookingView();
+				else showAccountView();
+			} catch (error) {
+				showToast(error.message);
+			}
+		});
+
+		bookingForm.addEventListener("submit", async (event) => {
+			event.preventDefault();
+			if (!bookingForm.reportValidity()) return;
+			const service = pendingService;
+			const payload = Object.fromEntries(new FormData(bookingForm));
+			payload.service = service;
+			payload.payment_method = document.querySelector("#bookingPaymentMethod").value;
+			try {
+				const result = await postApi("/api/bookings", payload);
+				pendingService = "";
+				showSuccess("Request received", `Request #${result.booking.id} for ${service} is saved as pending. Morrow must confirm the time with you.`);
+			} catch (error) {
+				showToast(error.message);
+			}
+		});
+
+		document.querySelector("#agentForm").addEventListener("submit", async (event) => {
+			event.preventDefault();
+			const form = event.currentTarget;
+			if (!form.reportValidity()) return;
+			const formData = new FormData(form);
+			const services = formData.getAll("services");
+			if (services.length === 0) {
+				showToast("Choose at least one service category.");
+				return;
+			}
+			const payload = {
+				name: formData.get("name"),
+				email: formData.get("email"),
+				phone: formData.get("phone"),
+				service_area: formData.get("service_area"),
+				experience: formData.get("experience"),
+				services,
+				contact_consent: formData.get("contact_consent") === "true",
+			};
+			try {
+				const result = await postApi("/api/agent-applications", payload);
+				form.reset();
+				showToast(`Application #${result.application_id} received. Morrow will review it and contact you.`);
+			} catch (error) {
+				showToast(error.message);
+			}
+		});
+
+		document.querySelectorAll("[data-filter]").forEach((button) => {
+			button.addEventListener("click", () => {
+				const filter = button.dataset.filter;
+				document.querySelectorAll("[data-filter]").forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+				document.querySelectorAll(".service-card").forEach((card) => {
+					card.hidden = filter !== "all" && card.dataset.category !== filter;
+				});
+			});
+		});
+
+		document.querySelector("#helpForm").addEventListener("submit", async (event) => {
+			event.preventDefault();
+			const form = event.currentTarget;
+			if (!form.reportValidity()) return;
+			try {
+				const result = await postApi("/api/contact", Object.fromEntries(new FormData(form)));
+				form.reset();
+				showToast(`${result.message} Reference #${result.message_id}.`);
+			} catch (error) {
+				showToast(error.message);
+			}
+		});
+
+		async function initializeSession() {
+			pendingService = sessionStorage.getItem("morrowPendingService") || "";
+			const query = new URLSearchParams(window.location.search);
+			const bookingQuery = query.get("booking") || "";
+			pendingBookingId = sessionStorage.getItem("morrowPendingBooking") || (/^\d+$/.test(bookingQuery) ? bookingQuery : "");
+			if (bookingQuery) {
+				query.delete("booking");
+				const remainingQuery = query.toString();
+				window.history.replaceState(null, "", `${window.location.pathname}${remainingQuery ? `?${remainingQuery}` : ""}${window.location.hash}`);
+			}
+			try {
+				await refreshCsrfToken();
+				const [result, googleConfig] = await Promise.all([
+					getApi("/api/session"),
+					getApi("/api/google/config"),
+				]);
+				googleLinkAvailable = googleConfig.available;
+				setCurrentUser(result.user);
+			} catch {
+				setCurrentUser(null);
+			}
+			const googleResult = query.get("google");
+			if (!googleResult) {
+				if (pendingBookingId) {
+					if (currentUser) showAccountView();
+					else openAuth("login");
+				}
+				return;
+			}
+			window.history.replaceState(null, "", window.location.pathname + window.location.hash);
+			const authMessage = sessionStorage.getItem("morrowAuthMessage") || "";
+			sessionStorage.removeItem("morrowAuthMessage");
+			sessionStorage.removeItem("morrowPendingService");
+			sessionStorage.removeItem("morrowPendingBooking");
+			const messages = {
+				connected: "Google account linked successfully.",
+				unavailable: "Google linking is not configured yet.",
+				login_required: "Log in before connecting a Google account.",
+				already_linked: "That Google account is already linked to another Morrow account.",
+				error: "Google linking could not be completed. Please try again.",
+			};
+			if (currentUser) {
+				if (pendingService) showBookingView();
+				else showAccountView();
+			}
+			const confirmation = [authMessage, messages[googleResult]].filter(Boolean).join(" ");
+			if (confirmation) showToast(confirmation);
+		}
+		initializeSession();
+
+		const mobileToggle = document.querySelector("#mobileToggle");
+		const mainNav = document.querySelector("#mainNav");
+		mobileToggle.addEventListener("click", () => {
+			const isOpen = mainNav.classList.toggle("is-open");
+			mobileToggle.setAttribute("aria-expanded", String(isOpen));
+			mobileToggle.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");
+			mobileToggle.textContent = isOpen ? "×" : "☰";
+		});
+		mainNav.querySelectorAll("a").forEach((link) => {
+			link.addEventListener("click", () => {
+				mainNav.classList.remove("is-open");
+				mobileToggle.setAttribute("aria-expanded", "false");
+				mobileToggle.setAttribute("aria-label", "Open navigation");
+				mobileToggle.textContent = "☰";
+			});
+		});
+
+		const heroAdVideo = document.querySelector("#heroAdVideo");
+		const heroAdStage = document.querySelector("#heroAdStage");
+		const heroAdPlay = document.querySelector("#heroAdPlay");
+		const heroAdSound = document.querySelector("#heroAdSound");
+		const heroAdVolume = document.querySelector("#heroAdVolume");
+		const heroAdSoundtrack = document.querySelector("#heroAdSoundtrack");
+		let heroAdSoundEnabled = true;
+		heroAdSoundtrack.volume = Number(heroAdVolume.value);
+
+		function startHeroAdSoundtrack() {
+			if (!heroAdSoundEnabled) return;
+			heroAdSoundtrack.muted = false;
+			heroAdSoundtrack.play().catch(() => {
+				heroAdSound.textContent = "Tap for sound";
+			});
+		}
+
+		function alignHeroAdSoundtrack() {
+			if (Number.isFinite(heroAdSoundtrack.duration) && heroAdSoundtrack.duration > 0) {
+				heroAdSoundtrack.currentTime = heroAdVideo.currentTime % heroAdSoundtrack.duration;
+			}
+		}
+
+		heroAdPlay.addEventListener("click", () => {
+			if (heroAdVideo.ended) {
+				heroAdVideo.currentTime = 0;
+				heroAdSoundtrack.currentTime = 0;
+			}
+			heroAdVideo.muted = false;
+			heroAdVideo.volume = 1;
+			heroAdVideo.play().catch(() => {
+				heroAdPlay.hidden = false;
+			});
+			startHeroAdSoundtrack();
+		});
+		heroAdVideo.addEventListener("play", () => {
+			heroAdStage.classList.add("is-playing");
+			heroAdPlay.hidden = true;
+			startHeroAdSoundtrack();
+		});
+		heroAdVideo.addEventListener("pause", () => {
+			heroAdStage.classList.remove("is-playing");
+			heroAdPlay.hidden = false;
+			heroAdPlay.innerHTML = '<span aria-hidden="true">▶</span> Resume with sound';
+			heroAdSoundtrack.pause();
+		});
+		heroAdVideo.addEventListener("seeked", () => {
+			alignHeroAdSoundtrack();
+			if (!heroAdVideo.paused) startHeroAdSoundtrack();
+		});
+		heroAdVideo.addEventListener("ended", () => {
+			heroAdSoundtrack.pause();
+			heroAdSoundtrack.currentTime = 0;
+			heroAdPlay.innerHTML = '<span aria-hidden="true">▶</span> Watch with sound';
+		});
+		heroAdSound.addEventListener("click", () => {
+			heroAdSoundEnabled = !heroAdSoundEnabled;
+			heroAdSoundtrack.muted = !heroAdSoundEnabled;
+			heroAdSound.textContent = heroAdSoundEnabled ? "Sound on" : "Sound off";
+			heroAdSound.setAttribute("aria-pressed", String(heroAdSoundEnabled));
+			if (heroAdSoundEnabled && !heroAdVideo.paused) startHeroAdSoundtrack();
+		});
+		heroAdVolume.addEventListener("input", () => {
+			heroAdSoundtrack.volume = Number(heroAdVolume.value);
+		});
+
+		document.querySelector("#year").textContent = new Date().getFullYear();
+		if ("IntersectionObserver" in window) {
+			const observer = new IntersectionObserver((entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						entry.target.classList.add("is-visible");
+						observer.unobserve(entry.target);
+					}
+				});
+			}, { threshold: 0.12 });
+			document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
+		} else {
+			document.querySelectorAll(".reveal").forEach((element) => element.classList.add("is-visible"));
+		}
+	</script>
+</body>
+</html>
+
